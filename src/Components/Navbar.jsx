@@ -1,4 +1,4 @@
-import { useState } from "react";
+import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,20 +10,21 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import SearchModal from "./NavSearch"; // import Search Modal
+import StorefrontSharpIcon from '@mui/icons-material/StorefrontSharp';
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Home","Products","About Us", "Blog"];
+const settings = ["Profile", "Account", "Logout"];
 
 function Navbar() {
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
-  const [search, setSearch] = useState(null);
-
-  console.log(search);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -36,10 +37,9 @@ function Navbar() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl" sx={{ background: "white", color: "black" }}>
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* DEsktop Section */}
-
+          <StorefrontSharpIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -49,14 +49,14 @@ function Navbar() {
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
-              fontWeight: 700,
+              fontWeight: 900,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
-              textTransform: "uppercase",
+              textDecorationLine: "underline"
             }}
           >
-            Exclusive
+            E-Shop
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -88,14 +88,12 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center", color: "black" }}>
-                    {page}
-                  </Typography>
+                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          {/* Mobile Section */}
+          <StorefrontSharpIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -106,26 +104,21 @@ function Navbar() {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
-              fontWeight: 700,
+              fontWeight: 900,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
-              textTransform: "uppercase",
+              textDecorationLine: "underline"
             }}
           >
-            Exclusive
+            E-Shop 
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "black",
-                  display: "block",
-                  marginLeft: "7%",
-                }}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
               </Button>
@@ -133,9 +126,11 @@ function Navbar() {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              {/* Search Modal */}
-              <SearchModal setSearch={setSearch} />
-              {/* Search Modal */}
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, color: "white"}}>
+                {/*  */}
+                <AccountCircleSharpIcon sx={{fontSize: "1.5em"}} />
+                {/*  */}
+              </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
@@ -151,7 +146,7 @@ function Navbar() {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
-              // onClose={handleCloseUserMenu}
+              onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
