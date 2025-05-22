@@ -36,7 +36,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{backgroundColor: "white"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <StorefrontSharpIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -51,7 +51,7 @@ function Navbar() {
               fontFamily: "monospace",
               fontWeight: 900,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
               textDecorationLine: "underline"
             }}
@@ -66,7 +66,7 @@ function Navbar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="black"
             >
               <MenuIcon />
             </IconButton>
@@ -84,11 +84,11 @@ function Navbar() {
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: "block", md: "none" } }}
+              sx={{ display: { xs: "block", md: "none" }, color: "black" }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                  <Typography sx={{ textAlign: "center", color: "black" }}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -106,7 +106,7 @@ function Navbar() {
               fontFamily: "monospace",
               fontWeight: 900,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
               textDecorationLine: "underline"
             }}
@@ -118,7 +118,7 @@ function Navbar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "black", display: "block" }}
               >
                 {page}
               </Button>
@@ -126,7 +126,7 @@ function Navbar() {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, color: "white"}}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, color: "black"}}>
                 {/*  */}
                 <AccountCircleSharpIcon sx={{fontSize: "1.5em"}} />
                 {/*  */}

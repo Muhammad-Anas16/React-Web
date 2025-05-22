@@ -1,13 +1,18 @@
 import { useState } from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar";
-import Home from "./Pages/Home";
+import Hero from "./Components/Hero";
+import Testimonial from "./Components/Testimonial";
+import { Products } from "./FetchAPI/products";
+
+console.log(Products);
 
 function App() {
   return (
     <>
       <Navbar />
-      <Home />
+      <Hero />
+      <Testimonial />
     </>
   );
 }
