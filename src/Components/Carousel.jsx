@@ -30,7 +30,7 @@ const Carousel = () => {
   }, [current]);
 
   return (
-    <section className="h-[70vh] flex items-center justify-center p-8 md:p-6">
+    <section className="h-[60vh] flex items-center justify-center p-4 md:p-6">
       <div className="relative w-[100vw] md:w-[95vw] lg:w-[90vw] h-full">
         {/* Carousel Wrapper */}
         <div className="relative h-full overflow-hidden rounded-lg">

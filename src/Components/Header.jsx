@@ -8,12 +8,9 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import StorefrontSharpIcon from "@mui/icons-material/StorefrontSharp";
 import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
 import SearchIcon from "@mui/icons-material/Search";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SunnyIcon from "@mui/icons-material/Sunny";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
@@ -136,9 +133,6 @@ function Header() {
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <IconButton onClick={handleOpenModal}>
               <SearchIcon sx={{ color: "black" }} />
-            </IconButton>
-            <IconButton>
-              <FavoriteBorderIcon sx={{ color: "black" }} />
             </IconButton>
             <IconButton>
               <SunnyIcon sx={{ color: "black" }} />
