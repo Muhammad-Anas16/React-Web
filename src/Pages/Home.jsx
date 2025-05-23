@@ -2,6 +2,7 @@
 import SliderSection from "../Components/SlideListSection";
 import SaleSection from "../Components/SaleSectionn";
 import CetagorySection from "../Components/CetagorySection";
+import ProductSection from "../Components/ProductSection";
 
 const HomePage = () => {
   return (
@@ -9,6 +10,7 @@ const HomePage = () => {
       <SliderSection />
       <SaleSection />
       <CetagorySection />
+      <ProductSection />
     </div>
   );
 };
