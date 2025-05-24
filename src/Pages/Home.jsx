@@ -1,8 +1,8 @@
-
 import SliderSection from "../Components/SlideListSection";
 import SaleSection from "../Components/SaleSectionn";
 import CetagorySection from "../Components/CetagorySection";
 import ProductSection from "../Components/ProductSection";
+import NewArrival from "../Components/NewArrival";
 
 const HomePage = () => {
   return (
@@ -11,8 +11,9 @@ const HomePage = () => {
       <SaleSection />
       <CetagorySection />
       <ProductSection />
+      <NewArrival />
     </div>
   );
 };
 
-export default HomePage
+export default HomePage;

@@ -16,7 +16,7 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-const pages = ["Home", "Contact", "About", "Sign Up"];
+const pages = ["Home", "Contact", "About"];
 const settings = ["Profile", "Account", "Logout"];
 
 const modalStyle = {
