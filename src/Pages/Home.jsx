@@ -3,6 +3,7 @@ import SaleSection from "../Components/SaleSectionn";
 import CetagorySection from "../Components/CetagorySection";
 import ProductSection from "../Components/ProductSection";
 import NewArrival from "../Components/NewArrival";
+import Footer from "../Components/Footer";
 
 const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage = () => {
       <CetagorySection />
       <ProductSection />
       <NewArrival />
+      <Footer />
     </div>
   );
 };
