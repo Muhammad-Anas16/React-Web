@@ -34,25 +34,25 @@ export default function SliderSection() {
         }}
       >
         <ul>
-          <ListItem>
+          <ListItem sx={{cursor: "pointer"}}>
             <ListItemText primary={`Woman’s Fashion`} />
           </ListItem>
-          <ListItem>
+          <ListItem sx={{cursor: "pointer"}}>
             <ListItemText primary={`Men’s Fashion`} />
           </ListItem>
-          <ListItem>
+          <ListItem sx={{cursor: "pointer"}}>
             <ListItemText primary={`Electronics`} />
           </ListItem>
-          <ListItem>
+          <ListItem sx={{cursor: "pointer"}}>
             <ListItemText primary={`Home & Lifestyle`} />
           </ListItem>
-          <ListItem>
+          <ListItem sx={{cursor: "pointer"}}>
             <ListItemText primary={`Medicine`} />
           </ListItem>
-          <ListItem>
+          <ListItem sx={{cursor: "pointer"}}>
             <ListItemText primary={`Men’s Fashion`} />
           </ListItem>
-          <ListItem>
+          <ListItem sx={{cursor: "pointer"}}>
             <ListItemText primary={`Health & Beauty`} />
           </ListItem>
         </ul>

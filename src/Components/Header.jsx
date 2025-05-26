@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,8 +15,18 @@ import SunnyIcon from "@mui/icons-material/Sunny";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import { Link } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../Redux/Theme/ThemeSlice";
 
-const pages = ["Home", "Contact", "About"];
+// Array of menu items with paths
+const pages = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Contact", path: "/contact" },
+];
+
 const settings = ["Profile", "Account", "Logout"];
 
 const modalStyle = {
@@ -32,23 +42,20 @@ const modalStyle = {
 };
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [openModal, setOpenModal] = React.useState(false);
-  const [searchInput, setSearchInput] = React.useState("");
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const mode = useSelector((state) => state.theme.mode);
+  const dispatch = useDispatch();
+
+  console.log(mode);
+
+  const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
+  const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
+  const handleCloseNavMenu = () => setAnchorElNav(null);
+  const handleCloseUserMenu = () => setAnchorElUser(null);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
@@ -61,11 +68,12 @@ function Header() {
     <AppBar position="static" sx={{ backgroundColor: "white", boxShadow: 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* Desktop Logo */}
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+            component={Link}
+            to="/"
             sx={{
               mr: 4,
               display: { xs: "none", md: "flex" },
@@ -77,12 +85,9 @@ function Header() {
             Exclusive
           </Typography>
 
+          {/* Mobile Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
+            <IconButton size="large" onClick={handleOpenNavMenu}>
               <MenuIcon sx={{ color: "black" }} />
             </IconButton>
             <Menu
@@ -94,18 +99,30 @@ function Header() {
               sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem
+                  key={page.name}
+                  component={Link}
+                  to={page.path}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    "&:hover": {
+                      color: "#DB4444",
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
 
+          {/* Mobile Logo */}
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="/"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -118,27 +135,57 @@ function Header() {
             Exclusive
           </Typography>
 
+          {/* Desktop Nav */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.name}
+                component={Link}
+                to={page.path}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "black",
+                  display: "block",
+                  fontWeight: 500,
+                  borderBottom: "2px solid transparent",
+                  transition: "color 0.3s, border-bottom 0.3s",
+                  "&:hover": {
+                    color: "#DB4444",
+                    borderBottom: "2px solid #DB4444",
+                  },
+                }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
 
+          {/* Icons */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <IconButton onClick={handleOpenModal}>
               <SearchIcon sx={{ color: "black" }} />
             </IconButton>
-            <IconButton>
-              <SunnyIcon sx={{ color: "black" }} />
+            <IconButton onClick={() => dispatch(toggleTheme())}>
+              {mode === "light" ? (
+                <SunnyIcon
+                  sx={{
+                    color: "black",
+                    filter: "drop-shadow(1px 1px 2px black)",
+                  }}
+                />
+              ) : (
+                <Brightness4Icon
+                  sx={{
+                    color: "black",
+                    filter: "drop-shadow(1px 1px 2px black)",
+                  }}
+                />
+              )}
             </IconButton>
             <IconButton onClick={handleOpenUserMenu}>
-              <AccountCircleSharpIcon sx={{ color: "black" }} />
+              {/* ============================== User or SignIn Icon or Button ============================== */}
+              <AccountCircleSharpIcon sx={{ color: "#DB4444" }} />
             </IconButton>
             <Menu
               anchorEl={anchorElUser}
@@ -175,7 +222,6 @@ function Header() {
           </Typography>
           <Box sx={{ display: "flex", gap: 1 }}>
             <TextField
-              id="search-input"
               fullWidth
               variant="outlined"
               placeholder="What are you looking for?"
@@ -192,4 +238,5 @@ function Header() {
     </AppBar>
   );
 }
+
 export default Header;

@@ -2,20 +2,32 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./Components/Header";
 import HomePage from "./Pages/Home";
-import { Products } from "./TenStack/Product";
+import SignUp from "./Components/Form/SignUp";
+import Login from "./Components/Form/Login";
+import About from "./Pages/About";
+import ContactUs from "./Pages/ContactUs";
+import { Route, Routes } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
-  const { data, isLoading, isFetching, refetch } = Products();
+  const products = useSelector((state) => state.products.items);
 
-  useEffect(() => {
-    console.log("isLoading => ", isLoading);
-    console.log("data => ", data);
-  }, [isLoading, data]);
+  const dispatch = useDispatch();
+
+  if (!products || products.lenght == 0) {
+    console.log("No Products Available");
+  } else {
+    products.mao((prod) => console.log(prod));
+  }
 
   return (
     <>
       <Header />
-      <HomePage />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
+      </Routes>
     </>
   );
 };
