@@ -1,4 +1,15 @@
+import { useForm } from "react-hook-form";
+
 const ContactForm = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => console.log(data);
+
   return (
     <section className="w-full min-h-[90vh] flex items-center justify-center px-4 bg-gray-50">
       <div className="w-full sm:w-[80%] md:w-[60%] lg:w-[40%] max-w-md bg-white shadow-lg border border-gray-200 px-6 md:px-8 py-10 rounded-xl">
@@ -7,7 +18,7 @@ const ContactForm = () => {
           <p className="text-sm text-gray-500">We’d love to hear from you!</p>
         </div>
 
-        <form className="w-full space-y-4">
+        <form className="w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <input
             type="text"
             name="name"

@@ -9,12 +9,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
-import SearchIcon from "@mui/icons-material/Search";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SunnyIcon from "@mui/icons-material/Sunny";
-import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import { Link } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,25 +23,21 @@ const pages = [
   { name: "Contact", path: "/contact" },
 ];
 
-const settings = ["Profile", "Account", "Logout"];
-
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+// const modalStyle = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   border: "2px solid #000",
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
 
   const mode = useSelector((state) => state.theme.mode);
   const dispatch = useDispatch();
@@ -56,16 +48,15 @@ function Header() {
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
   const handleCloseNavMenu = () => setAnchorElNav(null);
   const handleCloseUserMenu = () => setAnchorElUser(null);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
-
-  const handleSearchSubmit = () => {
-    console.log("Searching for:", searchInput);
-    handleCloseModal();
-  };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "white", boxShadow: 1 }}>
+    <AppBar
+      position="static"
+      sx={{
+        backgroundColor: mode === "light" ? "white" : "black",
+        boxShadow: 1,
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Desktop Logo */}
@@ -78,7 +69,7 @@ function Header() {
               mr: 4,
               display: { xs: "none", md: "flex" },
               fontWeight: 700,
-              color: "black",
+              color: mode === "dark" ? "white" : "black",
               textDecoration: "none",
             }}
           >
@@ -128,7 +119,7 @@ function Header() {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontWeight: 700,
-              color: "black",
+              color: mode === "dark" ? "white" : "black",
               textDecoration: "none",
             }}
           >
@@ -145,7 +136,7 @@ function Header() {
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
-                  color: "black",
+                  color: mode === "dark" ? "white" : "black",
                   display: "block",
                   fontWeight: 500,
                   borderBottom: "2px solid transparent",
@@ -163,29 +154,44 @@ function Header() {
 
           {/* Icons */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <IconButton onClick={handleOpenModal}>
-              <SearchIcon sx={{ color: "black" }} />
-            </IconButton>
             <IconButton onClick={() => dispatch(toggleTheme())}>
               {mode === "light" ? (
                 <SunnyIcon
                   sx={{
                     color: "black",
                     filter: "drop-shadow(1px 1px 2px black)",
+                    fontSize: "1.2em",
                   }}
                 />
               ) : (
                 <Brightness4Icon
                   sx={{
-                    color: "black",
-                    filter: "drop-shadow(1px 1px 2px black)",
+                    color: "white",
+                    filter: "drop-shadow(1px 1px 2px white)",
+                    fontSize: "1.2em",
                   }}
                 />
               )}
             </IconButton>
             <IconButton onClick={handleOpenUserMenu}>
               {/* ============================== User or SignIn Icon or Button ============================== */}
-              <AccountCircleSharpIcon sx={{ color: "#DB4444" }} />
+              {mode == "light" ? (
+                <AccountCircleOutlinedIcon
+                  sx={{
+                    color: "black",
+                    filter: "drop-shadow(1px 1px 2px black)",
+                    fontSize: "1.2em",
+                  }}
+                />
+              ) : (
+                <AccountCircleOutlinedIcon
+                  sx={{
+                    color:"white",
+                    filter: "drop-shadow(1px 1px 2px white)",
+                    fontSize: "1.2em",
+                  }}
+                />
+              )}
             </IconButton>
             <Menu
               anchorEl={anchorElUser}
@@ -194,47 +200,18 @@ function Header() {
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
               transformOrigin={{ vertical: "top", horizontal: "right" }}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {/*  */}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Profile</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
+              {/*  */}
             </Menu>
           </Box>
         </Toolbar>
       </Container>
-
-      {/* Search Modal */}
-      <Modal
-        open={openModal}
-        onClose={handleCloseModal}
-        aria-labelledby="search-modal-title"
-        aria-describedby="search-modal-description"
-      >
-        <Box sx={modalStyle}>
-          <Typography
-            id="search-modal-title"
-            variant="h6"
-            component="h2"
-            mb={2}
-          >
-            Search
-          </Typography>
-          <Box sx={{ display: "flex", gap: 1 }}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              placeholder="What are you looking for?"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              autoFocus
-            />
-            <IconButton onClick={handleSearchSubmit} color="primary">
-              <ArrowForwardIcon />
-            </IconButton>
-          </Box>
-        </Box>
-      </Modal>
     </AppBar>
   );
 }

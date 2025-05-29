@@ -8,6 +8,7 @@ import About from "./Pages/About";
 import ContactUs from "./Pages/ContactUs";
 import { Route, Routes } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
+import Page404 from "./Pages/PageNotFound";
 
 const App = () => {
   const products = useSelector((state) => state.products.items);
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/404" element={<Page404 />} />
       </Routes>
     </>
   );

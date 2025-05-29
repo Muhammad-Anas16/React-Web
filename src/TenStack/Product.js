@@ -20,7 +20,7 @@ const Products = () => {
       dispatch(setProducts(query.data))
       console.log("Data in useProducts hook:", query.data);
     }
-  }, [query.data, dispatch])
+  }, [query.data])
 
   return query
 }

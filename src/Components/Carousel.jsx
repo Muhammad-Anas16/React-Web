@@ -23,77 +23,70 @@ const Carousel = () => {
     setCurrent((prev) => (prev - 1 + total) % total);
   };
 
-  // Auto-slide
   useEffect(() => {
-    const interval = setInterval(nextSlide, 3000); // change image every 3s
+    const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
   }, [current]);
 
   return (
-    <section className="h-[60vh] flex items-center justify-center p-4 md:p-6">
-      <div className="relative w-[100vw] md:w-[95vw] lg:w-[90vw] h-full">
-        {/* Carousel Wrapper */}
-        <div className="relative h-full overflow-hidden rounded-lg">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                current === index ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <img
-                src={image.src}
-                className="block w-full h-full object-cover"
-                alt={image.name}
-              />
-            </div>
-          ))}
-        </div>
+    <section className="w-full max-w-screen-2xl mx-auto px-2 sm:px-4 lg:px-6 py-3">
+      <div className="relative w-full h-[70vh] sm:h-[75vh] md:h-[80vh] rounded-xl overflow-hidden shadow-lg">
+        {/* Slides */}
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+              current === index ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <img
+              src={image.src}
+              alt={image.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
 
         {/* Prev Button */}
         <button
           onClick={prevSlide}
-          className="absolute top-0 left-0 z-10 flex items-center justify-center h-full px-4 group focus:outline-none"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white rounded-full p-3"
         >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 hover:bg-white/50">
-            <svg
-              className="w-5 h-5 text-white"
-              fill="none"
-              viewBox="0 0 6 10"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5 1L1 5l4 4"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 6 10"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 1L1 5l4 4"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
 
         {/* Next Button */}
         <button
           onClick={nextSlide}
-          className="absolute top-0 right-0 z-10 flex items-center justify-center h-full px-4 group focus:outline-none"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white rounded-full p-3"
         >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 hover:bg-white/50">
-            <svg
-              className="w-5 h-5 text-white"
-              fill="none"
-              viewBox="0 0 6 10"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 1l4 4-4 4"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 6 10"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 1l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
       </div>
     </section>
