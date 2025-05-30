@@ -6,20 +6,21 @@ import SignUp from "./Components/Form/SignUp";
 import Login from "./Components/Form/Login";
 import About from "./Pages/About";
 import ContactUs from "./Pages/ContactUs";
-import { Route, Routes } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes, useParams } from "react-router";
 import Page404 from "./Pages/PageNotFound";
+import { useSelector } from "react-redux";
+import { Shop } from "./TenStack/Shop";
+import ProductDetail from "./Pages/ProductDetail";
 
 const App = () => {
-  const products = useSelector((state) => state.products.items);
+  const products = useSelector((state) => state.products.products);
+  const fleshSale = useSelector((state) => state.fleshSale);
 
-  const dispatch = useDispatch();
+  console.log("Products from redux:", products);
+  console.log("fleshSale from redux:", fleshSale);
 
-  if (!products || products.lenght == 0) {
-    console.log("No Products Available");
-  } else {
-    products.mao((prod) => console.log(prod));
-  }
+  const check = useParams();
+  console.log("Check Routes", check);
 
   return (
     <>
@@ -29,6 +30,12 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/404" element={<Page404 />} />
+        <Route path=":id" element={<ProductDetail />} />
+
+        <Route path="/auth">
+          <Route index element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+        </Route>
       </Routes>
     </>
   );

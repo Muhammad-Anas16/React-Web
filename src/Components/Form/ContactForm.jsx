@@ -1,12 +1,26 @@
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const ContactForm = () => {
+  const schema = yup.object({
+    userName: yup.string().required().min(3, "atleast 3 charectors required"),
+    email: yup
+      .string()
+      .required()
+      .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, "Invalid Email"),
+    subject: yup.string().required(),
+    message: yup.string().required(),
+  });
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema)
+  });
 
   const onSubmit = (data) => console.log(data);
 
@@ -25,16 +39,16 @@ const ContactForm = () => {
             id="name"
             placeholder="Your Name"
             className="w-full py-2.5 px-4 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-500"
-            required
+            {...register("userName")}
           />
 
           <input
-            type="email"
+            type="text"
             name="email"
             id="email"
             placeholder="Your Email"
             className="w-full py-2.5 px-4 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-500"
-            required
+            {...register("email")}
           />
 
           <input
@@ -43,6 +57,7 @@ const ContactForm = () => {
             id="subject"
             placeholder="Subject"
             className="w-full py-2.5 px-4 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-500"
+            {...register("subject")}
           />
 
           <textarea
@@ -51,7 +66,7 @@ const ContactForm = () => {
             rows="4"
             placeholder="Your Message"
             className="w-full py-2.5 px-4 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-500"
-            required
+            {...register("message")}
           ></textarea>
 
           <button
