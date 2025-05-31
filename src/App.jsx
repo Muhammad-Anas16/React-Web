@@ -11,6 +11,7 @@ import Page404 from "./Pages/PageNotFound";
 import { useSelector } from "react-redux";
 import { Shop } from "./TenStack/Shop";
 import ProductDetail from "./Pages/ProductDetail";
+import BillingDetail from "./Pages/BillingDetail";
 
 const App = () => {
   const products = useSelector((state) => state.products.products);
@@ -30,8 +31,12 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/404" element={<Page404 />} />
-        <Route path=":id" element={<ProductDetail />} />
-
+        {/* <Route path=":id" element={<ProductDetail />} /> */}
+        {/* <Route path=":id/:name" element={<BillingDetail />} /> */}
+        <Route path="/:id">
+          <Route index element={<ProductDetail />} />
+          <Route path="billing" element={<BillingDetail />} />
+        </Route>
         <Route path="/auth">
           <Route index element={<Login />} />
           <Route path="signup" element={<SignUp />} />
