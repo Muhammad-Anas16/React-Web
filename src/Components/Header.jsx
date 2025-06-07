@@ -42,7 +42,7 @@ function Header() {
   const mode = useSelector((state) => state.theme.mode);
   const dispatch = useDispatch();
 
-  console.log(mode);
+  // console.log(mode);
 
   const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);

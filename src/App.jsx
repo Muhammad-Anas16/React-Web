@@ -14,15 +14,9 @@ import ProductDetail from "./Pages/ProductDetail";
 import BillingDetail from "./Pages/BillingDetail";
 
 const App = () => {
-  const products = useSelector((state) => state.products.products);
-  const fleshSale = useSelector((state) => state.fleshSale);
 
-  console.log("Products from redux:", products);
-  console.log("fleshSale from redux:", fleshSale);
-
-  const check = useParams();
-  console.log("Check Routes", check);
-
+  Shop();
+  
   return (
     <>
       <Header />

@@ -11,12 +11,12 @@ export const Shop = () => {
 
     const { data, isSuccess } = useQuery({
         queryKey: ["Shop"],
-        queryFn: () => fetch(`${arr[0]}`).then((res) => res.json())
+        queryFn: () => fetch(`${arr[1]}`).then((res) => res.json())
     })
 
     useEffect(() => {
         if (isSuccess && data) {
-            console.log('Shop fetched data using Import:', data);
+            // console.log('Shop fetched data using Import:', data);
             dispatch(setProducts(data))
         }
     }, [isSuccess, data, dispatch]);

@@ -1,9 +1,12 @@
 import { useParams, Link } from "react-router";
-import { saleData } from "../Components/SaleData";
+import { useSelector } from "react-redux";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const currentData = saleData.find((data) => data.id == id);
+
+  const products = useSelector((state) => state.products.products);
+
+  const currentData = products.find((data) => data.id == id);
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -12,14 +15,14 @@ const ProductDetail = () => {
           <img
             alt="ecommerce"
             className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-            src={currentData?.image}
+            src={currentData?.images[0]}
           />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-            <h2 className="text-sm title-font text-gray-500 tracking-widest">
+            {/* <h2 className="text-sm title-font text-gray-500 tracking-widest">
               {currentData?.brand}
-            </h2>
+            </h2> */}
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-              {currentData?.name}
+              {currentData?.title}
             </h1>
             <div className="flex mb-4"></div>
             <p className="leading-relaxed">{currentData?.description}</p>
@@ -51,7 +54,7 @@ const ProductDetail = () => {
             </div>
             <div className="flex mt-4">
               <span className="title-font font-medium text-2xl text-gray-900">
-                {currentData.prices}.00
+                {currentData?.price}.00
               </span>
               <Link
                 to={`/${id}/billing`}
